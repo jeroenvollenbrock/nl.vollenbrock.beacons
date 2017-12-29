@@ -1,0 +1,29 @@
+{
+  "name": "nl.vollenbrock.beacons",
+  "version": "1.0.0",
+  "description": "A Homey app to track BLE beacons such as iBeacons or Eddystone",
+  "main": "app.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "dependencies": {
+    "async-mqtt": "^1.0.1"
+  },
+  "devDependencies": {
+    "homey-mock": "^1.0.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeroenvollenbrock/nl.vollenbrock.beacons.git"
+  },
+  "author": "Jeroen Vollenbrock <jeroen@athom.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jeroenvollenbrock/nl.vollenbrock.beacons/issues"
+  },
+  "homepage": "https://github.com/jeroenvollenbrock/nl.vollenbrock.beacons#readme"
+}

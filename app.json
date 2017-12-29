@@ -1,0 +1,186 @@
+{
+    "id": "nl.vollenbrock.beacons",
+    "sdk": 2,
+    "name": {
+        "en": "BLE Beacons"
+    },
+    "description": {
+        "en": "Adds support for detecting BLE beacons (iBeacons, Eddystone, etc)"
+    },
+    "category": "localization",
+    "version": "1.0.0",
+    "compatibility": ">=1.5.0",
+    "author": {
+        "name": "Jeroen Vollenbrock",
+        "email": "jeroen@vollenbrock.nl"
+    },
+    "permissions": [
+        "homey:app:nl.scanno.mqttbroker"
+    ],
+    "capabilities": {
+        "beacon_monitor_capability": {
+            "type": "boolean",
+            "title": {
+                "en": "Beacon Monitor"
+            },
+            "getable": false,
+            "setable": false
+        }
+    },
+    "drivers": [{
+        "id": "bleacon-proxy",
+        "name": {
+            "en": "bleacon",
+            "nl": "bleacon"
+        },
+        "class": "other",
+        "capabilities": ["beacon_monitor_capability"],
+        "capabilityOptions": {
+            "beacon_monitor_capability": {
+                "preventInsights": true,
+                "preventTag": true
+            }
+        },
+        "settings": [{
+            "id": "host",
+            "type": "text",
+            "label": {
+                "en": "TCP host",
+                "nl": "TCP host"
+            },
+            "value": ""
+        },{
+            "id": "port",
+            "type": "text",
+            "label": {
+                "en": "TCP port",
+                "nl": "TCP poort"
+            },
+            "value": ""
+        }],
+        "pair": [{
+            "id": "list",
+            "template": "list_devices",
+            "navigation": {
+                "next": "add"
+            }
+        }, {
+            "id": "add",
+            "template": "add_devices",
+            "navigation": {
+                "next": "done"
+            }
+        }, {
+            "id": "done",
+            "template": "done",
+            "navigation": {}
+        }]
+    },{
+        "id": "happy-bubbles",
+        "name": {
+            "en": "Happy Bubbles",
+            "nl": "Happy Bubbles"
+        },
+        "class": "other",
+        "capabilities": ["beacon_monitor_capability"],
+        "capabilityOptions": {
+            "beacon_monitor_capability": {
+                "preventInsights": true,
+                "preventTag": true
+            }
+        },
+        "pair": [{
+            "id": "list",
+            "template": "list_devices",
+            "navigation": {
+                "next": "add"
+            }
+        }, {
+            "id": "add",
+            "template": "add_devices",
+            "navigation": {
+                "next": "done"
+            }
+        }, {
+            "id": "done",
+            "template": "done",
+            "navigation": {}
+        }]
+    }, {
+        "id": "beacon",
+        "name": {
+            "en": "beacon",
+            "nl": "beacon"
+        },
+        "class": "other",
+        "capabilities": [],
+        "pair": [{
+            "id": "list",
+            "template": "list_devices",
+            "navigation": {
+                "next": "add"
+            }
+        }, {
+            "id": "add",
+            "template": "add_devices",
+            "navigation": {
+                "next": "done"
+            }
+        }, {
+            "id": "done",
+            "template": "done",
+            "navigation": {}
+        }]
+    }],
+    "flow": {
+        "triggers": [{
+            "id": "beacon_range_enter",
+            "title": {
+                "en": "Appears",
+                "nl": "Verschijnt"
+            },
+            "args": [{
+                "name": "device",
+                "type": "device",
+                "filter": "driver_id=beacon"
+            }]
+        }, {
+            "id": "beacon_range_proximity",
+            "title": {
+                "en": "Proximity change",
+                "nl": "Nabijheid veranderd"
+            },
+            "args": [{
+                "name": "device",
+                "type": "device",
+                "filter": "driver_id=beacon"
+            }, {
+                "name": "monitor",
+                "type": "device",
+                "filter": "capabilities=beacon_monitor_capability"
+            }],
+            "tokens": [{
+                "name": "proximity",
+                "type": "string",
+                "title": {
+                    "en": "Proximity",
+                    "nl": "Nabijheid"
+                },
+                "example": "near"
+            }]
+        }, {
+            "id": "beacon_range_leave",
+            "title": {
+                "en": "Disappears",
+                "nl": "Verdwijnt"
+            },
+            "args": [{
+                "name": "device",
+                "type": "device",
+                "filter": "driver_id=beacon"
+            }]
+        }],
+        "conditions": [],
+        "actions": []
+    }
+}
